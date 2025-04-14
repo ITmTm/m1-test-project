@@ -14,7 +14,8 @@ function useData() {
 	
 	useEffect(() => {
 		fetchItems();
-		setInterval(fetchItems, 10000);
+		const interval = setInterval(fetchItems, 10000);
+		return () => clearInterval(interval);
 	}, []);
 	
 	return items;
