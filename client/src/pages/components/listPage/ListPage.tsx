@@ -8,7 +8,7 @@ import useSort from '../../hooks/useSort';
 import './listPage.scss';
 
 const SubTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <h2 className={'list-subtitle'}>Active Item ID: {children}</h2>
+    <h2 className='list-subtitle' aria-label='active item id'>Active Item ID: {children}</h2>
 );
 
 function ListPage() {
@@ -58,15 +58,18 @@ function ListPage() {
 
 			<div className="list-container">
 				<div className="list">
-					{filteredItems.length === 0 && <span className='list-load'>Loading...</span>}
-					{filteredItems.map((item) => (
-						<ListItem
-							key={item.id}
-							item={item}
-							isActive={item.id === activeId}
-							onSetActive={() => handleSetActive(item.id)}
-						/>
-					))}
+					{filteredItems.length === 0 ? (
+						<span className='list-load'>Loading...</span>
+					) : (
+						filteredItems.map((item) => (
+							<ListItem
+								key={item.id}
+								item={item}
+								isActive={item.id === activeId}
+								onSetActive={() => handleSetActive(item.id)}
+							/>
+						))
+					)}
 				</div>
 			</div>
 		</div>
