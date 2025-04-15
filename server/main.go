@@ -20,8 +20,10 @@ type Item struct {
 
 var items []Item
 
+const itemCount = 500       /* Для изменения кол-ва получаемых айтемов */
+
 func init() {
-	for i := 0; i <= 5000; i++ {
+	for i := 0; i <= itemCount; i++ {
 		items = append(items, Item{
 			ID:          i,
 			Name:        faker.Name(),
