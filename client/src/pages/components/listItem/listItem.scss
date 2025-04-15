@@ -1,0 +1,60 @@
+.list-item {
+  margin: 10px 0;
+  padding-bottom: 10px;
+  transition: background-color 0.3s ease;
+  border-bottom: 1px solid #ccc;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &.active {
+    background-color: #b3d4fc; // Светло-голубой
+    &:hover {
+      background-color: #b3d4fc;
+    }
+  }
+
+  &:hover {
+    background-color: #cfd8dc; // Серо-голубой
+  }
+
+  &-id {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    color: #333;
+  }
+
+  &-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__description {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+    color: #444;
+    font-size: 0.95rem;
+    margin-top: 5px;
+  }
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  row-gap: 15px;
+  padding: 10px;
+  background-color: #ecf9de;
+  border-bottom: 1px solid #ccc;
+}
