@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ListItem } from '../listItem';
-import { Item } from "../../types";
+import { ListItem } from '../../components/listItem';
+import { Item } from "../../shared/types";
 
-import useData from '../../services/useData';
-import useSort from '../../hooks/useSort';
+import useData from '../../shared/services/useData';
+import useSort from '../../shared/hooks/useSort';
 
 import './listPage.scss';
 
@@ -41,7 +41,7 @@ function ListPage() {
 		} else {
 			const escapedQuery = safeQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 			setFilteredItems(
-				sortedItems.filter(item => `${item.id}`.includes(escapedQuery))
+				sortedItems.filter(item => item.id.toString().includes(escapedQuery))
 			);
 		}
 	}, [query, sortedItems]);
@@ -58,8 +58,10 @@ function ListPage() {
 
 			<div className="list-container">
 				<div className="list">
-					{filteredItems.length === 0 ? (
+					{items.length === 0 ? (
 						<span className='list-load'>Loading...</span>
+					) : filteredItems.length === 0 ? (
+						<span className='list-nothing'>Nothing found</span>
 					) : (
 						filteredItems.map((item) => (
 							<ListItem

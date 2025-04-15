@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Item } from "../../types";
+import { Item } from "../../shared/types";
 import Button from '../button/Button';
 
 import './listItem.scss';

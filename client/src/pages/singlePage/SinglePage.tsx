@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Item } from "../../types";
-import { fetchItemByID } from "../../services/api";
+import { Item } from "../../shared/types";
+import { fetchItemByID } from "../../shared/services/api";
 
 import './singlePage.scss';
 
@@ -42,7 +42,7 @@ function SinglePage() {
 		  <Link to='/'>Go Back</Link>
 		  <h2>Item Details</h2>
 
-		  {loading && <p className='detail-load'>Loading...</p>}
+		  {loading && <p>Loading...</p>}
 
 		  {error && <p className='error'>{error}</p>}
 
