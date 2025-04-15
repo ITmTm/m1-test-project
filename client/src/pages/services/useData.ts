@@ -1,34 +1,26 @@
 import { useEffect, useState } from 'react';
-
-type Item = {
-	id: number;
-	name: string;
-	description: string;
-};
+import { fetchItems } from "./api";
+import { Item } from "../types";
 
 function useData(): Item[] {
-	const [items, setItems] = useState<Item[]>([]);
-	
-	function fetchItems() {
-		fetch(`${process.env.API_URL}/items`)
-			.then(res => {
-				if (!res.ok) {
-					throw new Error(`HTTP error! status: ${res.status}`)
-				}
-				return res.json();
-			})
-			.then((data: Item[]) => setItems(data))
-			.catch(err => {
-				console.error('Failed to fetch items', err);
-			})
+	const [ items, setItems ] = useState<Item[]>([]);
+
+	const loadItems = async () => {
+		try {
+			const data = await fetchItems();
+			setItems(data);
+		} catch (error) {
+			console.error('Failed to fetch items:', error);
+		}
 	}
-	
+
 	useEffect(() => {
-		fetchItems();
-		const interval = setInterval(fetchItems, 10000);
+		loadItems().catch(console.error);
+
+		const interval = setInterval(loadItems, 10000);
 		return () => clearInterval(interval);
 	}, []);
-	
+
 	return items;
 }
 
