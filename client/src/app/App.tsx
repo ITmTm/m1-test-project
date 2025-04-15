@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import ListPage from '../listPage/ListPage';
-import SinglePage from '../singlePage/SinglePage';
+import ListPage from '../pages/listPage/ListPage';
+import SinglePage from '../pages/singlePage/SinglePage';
 
 function App() {
   return (
