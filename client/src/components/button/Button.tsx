@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React from 'react';
 
 import './button.scss';
 
@@ -10,14 +10,11 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ onClick, id, disabled = false, children }) => {
-	const handleClick = useCallback(() => {
-		onClick(id);
-	}, [onClick, id]);
 
 	return (
 		<button
 			className='list-item-btn'
-			onClick={handleClick}
+			onClick={() => onClick(id)}
 			disabled={disabled}
 		>
 			{children}
@@ -25,4 +22,4 @@ const Button: React.FC<ButtonProps> = ({ onClick, id, disabled = false, children
 	)
 }
 
-export default memo(Button);
+export default Button;
