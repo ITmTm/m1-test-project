@@ -1,15 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { ListItem } from '../listItem';
+import { Item } from "../../types";
+
 import useData from '../../services/useData';
 import useSort from '../../hooks/useSort';
 
 import './listPage.scss';
-
-type Item = {
-	id: number;
-	name: string;
-	description: string;
-};
 
 const SubTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <h2 className={'list-subtitle'}>Active Item ID: {children}</h2>
