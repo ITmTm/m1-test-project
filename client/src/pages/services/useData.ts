@@ -1,12 +1,23 @@
 import { useEffect, useState } from 'react';
 
-function useData() {
-	const [items, setItems] = useState<any[]>([]);
+type Item = {
+	id: number;
+	name: string;
+	description: string;
+};
+
+function useData(): Item[] {
+	const [items, setItems] = useState<Item[]>([]);
 	
 	function fetchItems() {
 		fetch(`${process.env.API_URL}/items`)
-			.then(res => res.json())
-			.then(data => setItems(data))
+			.then(res => {
+				if (!res.ok) {
+					throw new Error(`HTTP error! status: ${res.status}`)
+				}
+				return res.json();
+			})
+			.then((data: Item[]) => setItems(data))
 			.catch(err => {
 				console.error('Failed to fetch items', err);
 			})
