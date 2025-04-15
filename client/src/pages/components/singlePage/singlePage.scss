@@ -1,0 +1,17 @@
+.detail {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  row-gap: 15px;
+  padding: 10px;
+  background-color: #ecf9de;
+  border-bottom: 1px solid #ccc;
+}
+
+.error {
+  margin: 0 auto;
+  font-size: 2rem;
+  color: red;
+  font-weight: 600;
+}
