@@ -1,43 +1,39 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { Item } from "../../types";
+import { fetchItemByID } from "../../services/api";
 
-type ItemType = {
-	id: number;
-	name: string;
-	description: string;
-};
+import './singlePage.scss';
 
 function SinglePage() {
 	const { id } = useParams();
-	const [item, setItem] = useState<ItemType | null>(null);
+	const [item, setItem] = useState<Item | null>(null);
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 
 	useEffect(() => {
-		const fetchItem = async () => {
+		const loadItem = async () => {
 			setLoading(true);
 			setError(null);
 
 			try {
-				const res = await fetch(`${process.env.API_URL}/items/${id}`);
-				if (res.status === 403) {
-					setError('403: Access denied for this item.');
-					setItem(null);
-				} else if (!res.ok) {
-					throw new Error(`HTTP error! Status: ${res.status}`);
-				} else {
-					const data = await res.json();
-					setItem(data);
-				}
+				const data = await fetchItemByID(id!);
+				setItem(data);
 			} catch (err) {
-				setError('Failed to fetch item. Please try again later.');
+				if (err.message === '403') {
+					setError('403: Access denied for this item.');
+				} else {
+					setError('Failed to fetch item. Please try again later.');
+				}
 				setItem(null);
 			} finally {
 				setLoading(false);
 			}
 		};
 
-		fetchItem().catch(console.error);
+		if (id) {
+			loadItem().catch(console.error);
+		}
 	}, [id]);
 
 
@@ -46,7 +42,7 @@ function SinglePage() {
 		  <Link to='/'>Go Back</Link>
 		  <h2>Item Details</h2>
 
-		  {loading && <p>Loading...</p>}
+		  {loading && <p className='detail-load'>Loading...</p>}
 
 		  {error && <p className='error'>{error}</p>}
 
