@@ -4,6 +4,14 @@
   & > li:not(:last-child) {
     margin-top: 8px;
   }
+
+  &-load {
+    text-align: center;
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: blue;
+  }
 }
 
 .list-wrapper {
