@@ -58,7 +58,7 @@ function ListPage() {
 
 			<div className="list-container">
 				<div className="list">
-					{filteredItems.length === 0 && <span>Loading...</span>}
+					{filteredItems.length === 0 && <span className='list-load'>Loading...</span>}
 					{filteredItems.map((item) => (
 						<ListItem
 							key={item.id}
